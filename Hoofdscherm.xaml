@@ -1,0 +1,70 @@
+﻿<Window x:Class="Boeiend.Hoofdscherm"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" 
+	xmlns:local="clr-namespace:Boeiend"
+	Title="Boeiend"
+	Width="626"
+	Height="530">
+	<Grid>
+		<DockPanel>
+			<Menu
+				DockPanel.Dock="Top">
+				<MenuItem
+					Header="_Bestand"
+					RenderTransformOrigin="0.5,0.5">
+					<MenuItem
+						Header="_Nieuwe Markeringen"
+						IsEnabled="False" />
+					<MenuItem
+						Header="_Open Markeringen"
+						Click="miOpenClick" />
+					<MenuItem
+						Header="_Bewaar Markeringen"
+						IsEnabled="False" />
+					<MenuItem
+						Header="Bewaar Markeringen _Als"
+						IsEnabled="False" />
+					<MenuItem
+						Header="_Importeer Markeringen"
+						IsEnabled="False" />
+					<MenuItem
+						Header="_Exporteer Markeringen"
+						Click="miExportClick" />
+					<MenuItem
+						Header="Markeringen _Eigenschappen"
+						IsEnabled="False" />
+					<MenuItem
+						Header="_Boeiend Aflsuiten"
+						Click="miExitClick" />
+				</MenuItem>
+				<MenuItem
+					Header="_Bewerken"
+					RenderTransformOrigin="0.5,0.5">
+					<MenuItem
+						Header="_Verwijder Markeringen"
+						IsEnabled="False" />
+				</MenuItem>
+				<MenuItem
+					Header="_Help"
+					RenderTransformOrigin="0.5,0.5">
+					<MenuItem Header="_Handleiding" IsEnabled="False" />
+					<MenuItem Header="_Over Boeiend" Click="miAboutClick" />
+				</MenuItem>
+			</Menu>
+			<TabControl Name="tcTabs">
+				<TabItem Header="Markeringen">
+					<local:Markeringsscherm x:Name="Markeringsscherm" />
+				</TabItem>
+				<TabItem Header="Instellingen">
+					<local:Instellingenscherm x:Name="Instellingenscherm" />
+				</TabItem>
+				<TabItem Header="Logging" Name="tiLoggingscherm">
+					<local:Loggingscherm x:Name="Loggingscherm" />
+				</TabItem>
+			</TabControl>
+		</DockPanel>		
+	</Grid>
+</Window>

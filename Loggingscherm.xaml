@@ -1,0 +1,39 @@
+<UserControl x:Class="Boeiend.Loggingscherm"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Boeiend"
+    xmlns:help="clr-namespace:Boeiend"
+ 	help:HelpProvider.HelpString='Logging'
+	Loaded="OnControlLoaded">
+	<Grid>
+		<DockPanel
+			LastChildFill="True"
+			VerticalAlignment="Stretch">
+			<StackPanel
+				DockPanel.Dock="Top"
+				Orientation="Horizontal">
+				<Button
+					Content="Clipboard"
+					DockPanel.Dock="Left"
+					HorizontalAlignment="Left" 
+					Click="btClipboard_Click" />
+			</StackPanel>
+			<ListView
+				Name="lvLogging"
+				ItemsSource="{Binding Clients}"
+				HorizontalAlignment="Stretch"
+				VerticalAlignment="Stretch"
+				IsSynchronizedWithCurrentItem="True">
+				<ListView.View>
+					<GridView>
+						<GridViewColumn Header="Ernst"  DisplayMemberBinding="{Binding Type}" />
+						<GridViewColumn Header="Tijd"   DisplayMemberBinding="{Binding Tijd, StringFormat=t}" />
+						<GridViewColumn Header="Module" DisplayMemberBinding="{Binding Module}" />
+						<GridViewColumn Header="Regel"  DisplayMemberBinding="{Binding Regel}" />
+						<GridViewColumn Header="Tekst"  DisplayMemberBinding="{Binding Tekst}" />
+					</GridView>
+				</ListView.View>
+			</ListView>
+		</DockPanel>
+	</Grid>
+</UserControl>

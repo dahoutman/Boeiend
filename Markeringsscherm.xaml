@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="Boeiend.Markeringsscherm"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		     xmlns:local="clr-namespace:Boeiend">
+	
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition	Height="4*" />
+			<RowDefinition	Height="Auto" />
+			<RowDefinition	Height="1*" />
+		</Grid.RowDefinitions>
+		<Grid
+			Grid.Row="0">
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition
+					Height="Auto" />
+			</Grid.RowDefinitions>
+			<ListView
+				Name="lvMarkeringen"
+				Grid.Row="0">
+				<ListView.View>
+					<GridView
+						AllowsColumnReorder="False">
+						<GridViewColumn	Header="Vaarwater" DisplayMemberBinding="{Binding Vaarwater}" />
+						<GridViewColumn Header="Code" DisplayMemberBinding="{Binding Benam_cod}" />
+						<GridViewColumn Header="Benaming" DisplayMemberBinding="{Binding Benaming}" />
+						<GridViewColumn Header="Inbedrijf" DisplayMemberBinding="{Binding Inbedrijf}" />
+						<GridViewColumn Header="X rd" DisplayMemberBinding="{Binding Y_rd	}" />
+						<GridViewColumn Header="Y rd" DisplayMemberBinding="{Binding X_rd	}" />
+						<GridViewColumn Header="Soort" DisplayMemberBinding="{Binding Obj_soort}" />
+						<GridViewColumn Header="" DisplayMemberBinding="{Binding Iala_cat}" />
+						<GridViewColumn Header="N wgs" DisplayMemberBinding="{Binding N_wgs_gms}" />
+						<GridViewColumn Header="E wgs" DisplayMemberBinding="{Binding E_wgs_gms}" />
+						<GridViewColumn Header="N wgs" DisplayMemberBinding="{Binding N_wgs_gm}" />
+						<GridViewColumn Header="E wgs" DisplayMemberBinding="{Binding E_wgs_gm}" />
+						<GridViewColumn Header="Vormcode" DisplayMemberBinding="{Binding Obj_vorm_c}" />
+						<GridViewColumn Header="Vorm" DisplayMemberBinding="{Binding Obj_vorm}" />
+						<GridViewColumn Header="Kleurcode" DisplayMemberBinding="{Binding Obj_kleur_c}" />
+						<GridViewColumn Header="Kleur" DisplayMemberBinding="{Binding Obj_kleur}" />
+						<GridViewColumn Header="Patrooncode" DisplayMemberBinding="{Binding Kleurpatr_c}" />
+						<GridViewColumn Header="Kleurpatroon" DisplayMemberBinding="{Binding Kleurpatr}" />
+						<GridViewColumn Header="V_tt_c" DisplayMemberBinding="{Binding V_tt_c	}" />
+						<GridViewColumn Header="Tt_toptek" DisplayMemberBinding="{Binding Tt_toptek}" />
+						<GridViewColumn Header="Tt_kleur_c" DisplayMemberBinding="{Binding Tt_kleur_c}" />
+						<GridViewColumn Header="Tt_kleur" DisplayMemberBinding="{Binding Tt_kleur}" />
+						<GridViewColumn Header="Tt_pat_c" DisplayMemberBinding="{Binding Tt_pat_c}" />
+						<GridViewColumn Header="Tt_klr_pat" DisplayMemberBinding="{Binding Tt_klr_pat}" />
+						<GridViewColumn Header="Signaalcode" DisplayMemberBinding="{Binding Sign_kar_c}" />
+						<GridViewColumn Header="Karakteristiek" DisplayMemberBinding="{Binding Sign_kar}" />
+						<GridViewColumn Header="Groepscode" DisplayMemberBinding="{Binding Sign_gr_c}" />
+						<GridViewColumn Header="Groep" DisplayMemberBinding="{Binding Sign_groep}" />
+						<GridViewColumn Header="Periode" DisplayMemberBinding="{Binding Sign_perio}" />
+						<GridViewColumn Header="Racon" DisplayMemberBinding="{Binding Racon_code}" />
+						<GridViewColumn Header="Lichtcode" DisplayMemberBinding="{Binding Licht_kl_c}" />
+						<GridViewColumn Header="Lichtkleur" DisplayMemberBinding="{Binding Licht_klr}" />
+						<GridViewColumn Header="Opgeheven" DisplayMemberBinding="{Binding Opgeheven}" />
+						<GridViewColumn Header="X wgs84" DisplayMemberBinding="{Binding X_wgs84	}" />
+						<GridViewColumn Header="Y wgs84" DisplayMemberBinding="{Binding Y_wgs84	}" />				
+					</GridView>
+				</ListView.View>
+			</ListView>
+		</Grid>
+		<GridSplitter
+			Background="DarkGray"
+			ResizeDirection="Rows"
+			Grid.Row="1"
+			Height="5"
+			ResizeBehavior="PreviousAndNext"
+			VerticalAlignment="Center"
+			HorizontalAlignment="Stretch" />
+        <ListBox Grid.Row="2"
+				 Name="lbVaarwater">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Checked="cbItemChanged" Unchecked="cbItemChanged" IsChecked="{Binding Value, Mode=OneWay}" Content="{Binding Key, Mode=OneWay}" /> 
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>        
+	</Grid>
+</UserControl>

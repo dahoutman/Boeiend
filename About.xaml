@@ -1,0 +1,54 @@
+﻿<Window x:Class="Boeiend.About"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Title="Over"
+	WindowStyle="SingleBorderWindow"
+	WindowStartupLocation="CenterOwner"
+	ShowInTaskbar="False"
+	ResizeMode="NoResize"
+	Width="480"
+	Height="480">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="1*" />
+			<RowDefinition Height="5*" />
+		</Grid.RowDefinitions>
+		<Grid Grid.Row="0"> 
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="2*" />
+				<ColumnDefinition Width="3*" />
+			</Grid.ColumnDefinitions>
+			<Image
+				Source="Boeiend.jpg"
+				Grid.Column="0"
+				Grid.Row="0"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Stretch" />
+			<TextBlock
+				VerticalAlignment="Stretch"
+				HorizontalAlignment="Stretch"
+				Margin="10"
+				Grid.Row="0"
+				Grid.Column="1"
+				Name="tbAbout" >
+			</TextBlock>
+		</Grid>
+		<ScrollViewer Grid.Row="1">
+			<TextBlock
+				VerticalAlignment="Stretch"
+				HorizontalAlignment="Stretch"
+				Margin="10">
+				Historie<LineBreak />
+				0.2.0 - 8 mei 2014<LineBreak />
+				- geschikt gemaakt voor WinGPS<LineBreak />
+				- instellingenscherm geactiveerd<LineBreak />
+				- loggingscherm geactiveerd<LineBreak />
+				- in insteller geplaatst<LineBreak />
+				0.1.1 - 4 mei 2014<LineBreak />
+				- geschikt gemaakt voor OpenCPN<LineBreak />
+				0.1.0 - 4 mei 2014<LineBreak />
+				- eerste openbare versie<LineBreak />
+			</TextBlock>
+		</ScrollViewer>
+	</Grid>
+</Window>

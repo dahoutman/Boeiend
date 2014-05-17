@@ -1,0 +1,32 @@
+<UserControl x:Class="Boeiend.Instellingenscherm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Boeiend">
+	
+	<Grid Margin="20">
+		<Grid.RowDefinitions>
+	        <RowDefinition Height="Auto" />
+	        <RowDefinition Height="Auto" />
+	    </Grid.RowDefinitions>
+		<GroupBox Grid.Row="0" >
+			<GroupBox.Header> 
+				<TextBlock Text="Uitvoerformaat" Foreground="Black" FontWeight="Bold"/>
+			</GroupBox.Header>
+			<Grid>
+				<Grid.RowDefinitions>
+			        <RowDefinition Height="Auto" />
+			        <RowDefinition Height="Auto" />
+			        <RowDefinition Height="Auto" />
+			        <RowDefinition Height="*" />
+			    </Grid.RowDefinitions>
+			    <Grid.ColumnDefinitions>
+			        <ColumnDefinition Width="1*" />
+			        <ColumnDefinition Width="1*" />
+				</Grid.ColumnDefinitions>
+				<RadioButton Name="rbOpencpn" Grid.Row="0" Grid.Column="0" IsChecked="True"  Checked="rbOpencpnClicked" Margin="10" Content="OpenCPN" />
+				<RadioButton Name="rbLocus"   Grid.Row="1" Grid.Column="0" IsChecked="False" Checked="rbLocusChecked"   Margin="10" Content="Locus maps (Android)" />
+				<RadioButton Name="rbWingps"  Grid.Row="2" Grid.Column="0" IsChecked="False" Checked="rbWingpsChecked"  Margin="10" Content="WinGPS" />
+			</Grid>
+		</GroupBox>
+	</Grid>
+</UserControl>
