@@ -83,9 +83,10 @@
       <SubType>Code</SubType>
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CSV.cs" />
+    <Compile Include="Formaten\CSV.cs" />
     <Compile Include="Formaten\Export.cs" />
     <Compile Include="Formaten\GPX.cs" />
+    <Compile Include="Formaten\WPT.cs" />
     <Compile Include="HelpProvider.cs" />
     <Compile Include="Instellingenscherm.xaml.cs">
       <DependentUpon>Instellingenscherm.xaml</DependentUpon>
@@ -116,10 +117,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Nsis\Boeiend.exe" />
+    <None Include="Nsis\Boeiend.nsi" />
     <Resource Include="Boeiend.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Formaten" />
+    <Folder Include="Nsis" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -18,7 +18,7 @@ using System.Windows.Media;
 
 namespace Boeiend
 {
-	public enum				eFormaat {OpenCPN, LocsMaps, WinGPS};
+	public enum				eFormaat {OpenCPN, LocsMaps, WinGPS, OziExp};
 	public delegate void 	ActGelezenEventHandler(object pSender, eFormaat pFormaat);
 
 	/// <summary>
@@ -55,6 +55,12 @@ namespace Boeiend
 		{
 			gFormaat = eFormaat.WinGPS;
 			if (ActGelezen != null) ActGelezen(sender, eFormaat.WinGPS);
+		}
+
+		private void rbOziExpChecked(object sender, RoutedEventArgs e)
+		{
+			gFormaat = eFormaat.OziExp;
+			if (ActGelezen != null) ActGelezen(sender, eFormaat.OziExp);
 		}
 	}
 }

@@ -17,10 +17,6 @@ namespace Boeiend
 	/// </summary>
 	public class Export
 	{
-		public Export()
-		{
-		}
-
 		public void BewaarBestand(string pBestandsnaam, List<tMarkering> paFiltering)
 		{
 			TextWriter 	lFileHandle = null;

@@ -39,11 +39,16 @@
 				HorizontalAlignment="Stretch"
 				Margin="10">
 				Historie<LineBreak />
+				0.3.0 - 18 mei 2014<LineBreak />
+				- geschikt gemaakt voor OziExplorer<LineBreak />
+				- waypoints voor WinGPS verbeterd<LineBreak />
+				- shortcut voor installer<LineBreak />
+				- onder GitHub gebracht<LineBreak />
 				0.2.0 - 8 mei 2014<LineBreak />
 				- geschikt gemaakt voor WinGPS<LineBreak />
 				- instellingenscherm geactiveerd<LineBreak />
 				- loggingscherm geactiveerd<LineBreak />
-				- in insteller geplaatst<LineBreak />
+				- in installer geplaatst<LineBreak />
 				0.1.1 - 4 mei 2014<LineBreak />
 				- geschikt gemaakt voor OpenCPN<LineBreak />
 				0.1.0 - 4 mei 2014<LineBreak />

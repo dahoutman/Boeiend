@@ -26,6 +26,7 @@
 				<RadioButton Name="rbOpencpn" Grid.Row="0" Grid.Column="0" IsChecked="True"  Checked="rbOpencpnClicked" Margin="10" Content="OpenCPN" />
 				<RadioButton Name="rbLocus"   Grid.Row="1" Grid.Column="0" IsChecked="False" Checked="rbLocusChecked"   Margin="10" Content="Locus maps (Android)" />
 				<RadioButton Name="rbWingps"  Grid.Row="2" Grid.Column="0" IsChecked="False" Checked="rbWingpsChecked"  Margin="10" Content="WinGPS" />
+				<RadioButton Name="rbOziExp"  Grid.Row="3" Grid.Column="0" IsChecked="False" Checked="rbOziExpChecked"  Margin="10" Content="OziExplorer (experimenteel)" />
 			</Grid>
 		</GroupBox>
 	</Grid>

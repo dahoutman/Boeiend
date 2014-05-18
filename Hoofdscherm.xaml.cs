@@ -44,6 +44,7 @@ namespace Boeiend
  				case eFormaat.OpenCPN: 	Markeringsscherm.Export = new GPX(); break;
  				case eFormaat.LocsMaps: Markeringsscherm.Export = new GPX(); break;
  				case eFormaat.WinGPS: 	Markeringsscherm.Export = new CSV(); break;
+ 				case eFormaat.OziExp: 	Markeringsscherm.Export = new WPT(); break;
  			}
  		}
 
@@ -78,6 +79,7 @@ namespace Boeiend
 				case eFormaat.OpenCPN: 	lFD.Filter = "Supported (*.gpx)|*.gpx|All (*.*)|*.*" ; break;
 				case eFormaat.LocsMaps:	lFD.Filter = "Supported (*.gpx)|*.gpx|All (*.*)|*.*" ; break;
 				case eFormaat.WinGPS: 	lFD.Filter = "Supported (*.csv)|*.csv|All (*.*)|*.*" ; break;
+				case eFormaat.OziExp: 	lFD.Filter = "Supported (*.wpt)|*.wpt|All (*.*)|*.*" ; break;
 			}
 			bool? lResult = lFD.ShowDialog();
 			if (lResult == true)	
