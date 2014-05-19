@@ -31,7 +31,7 @@ Section "" ;No components page, name is not important
 SetOutPath $INSTDIR
   
 ; Put file there
-File ..\bin\Debug\Boeiend.exe
+File ..\bin\Debug\Boeiend-setup.exe
 File ..\Symbols\Betonning.zip
 ;  File "d:\Temp\Types en Profiel.w5db"
 
