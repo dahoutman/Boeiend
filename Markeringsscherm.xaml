@@ -25,6 +25,7 @@
 						<GridViewColumn	Header="Vaarwater" DisplayMemberBinding="{Binding Vaarwater}" />
 						<GridViewColumn Header="Code" DisplayMemberBinding="{Binding Benam_cod}" />
 						<GridViewColumn Header="Benaming" DisplayMemberBinding="{Binding Benaming}" />
+						<GridViewColumn Header="S57 ID" DisplayMemberBinding="{Binding S57_id}" />
 						<GridViewColumn Header="Inbedrijf" DisplayMemberBinding="{Binding Inbedrijf}" />
 						<GridViewColumn Header="X rd" DisplayMemberBinding="{Binding Y_rd	}" />
 						<GridViewColumn Header="Y rd" DisplayMemberBinding="{Binding X_rd	}" />

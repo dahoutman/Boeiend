@@ -39,6 +39,7 @@ namespace Boeiend
 		public	string	Vaarwater		{get; set;}
 		public	string	Benam_cod		{get; set;}
 		public	string	Benaming		{get; set;}
+		public	string	S57_id			{get; set;}
 		public	string	Inbedrijf		{get; set;}
 		public	string	Y_rd			{get; set;}
 		public	string	X_rd			{get; set;}
@@ -99,11 +100,13 @@ namespace Boeiend
 		
 		public void ParseCsvBestand(string pBestandsnaam)
 		{
-	    	int			lRegelnummer = 1;
-	    	string 		lRegel;
-			TextReader 	lFileHandle = null;
+	    	int				lRegelnummer = 1;
+	    	string 			lRegel;
+			TextReader 		lFileHandle = null;
+			var				laKolom = new Dictionary<string, int>();
 			
 			gaMarkering.Clear();
+			gaFiltering.Clear();
 			gaVaarwater.Clear();
 			
 			gaVaarwater.Add("Allemaal", true);
@@ -114,44 +117,55 @@ namespace Boeiend
 				while ((lRegel = lFileHandle.ReadLine()) != null)
 				{
 					string [] laWoord = lRegel.Split(';');
+					if (lRegelnummer == 1)
+					{
+						for (int i=0; i<laWoord.Length; i++)
+						{
+							if (laWoord[i].Trim() != "")
+							{
+								laKolom.Add(laWoord[i].Trim().ToUpper(), i);
+							}
+						}
+					}
 					if (lRegelnummer > 1 && laWoord.Length > 30)
 					{
 						var lMarkering = new tMarkering();
-						lMarkering.Vaarwater 	= laWoord[0];
-						lMarkering.Benam_cod 	= laWoord[1];
-						lMarkering.Benaming		= laWoord[2];
-						lMarkering.Inbedrijf 	= laWoord[3];
-						lMarkering.Y_rd	 		= laWoord[4];
-						lMarkering.X_rd	 		= laWoord[5];
-						lMarkering.Obj_soort 	= laWoord[6];
-						lMarkering.Iala_cat 	= laWoord[7];
-						lMarkering.N_wgs_gms 	= laWoord[8];
-						lMarkering.E_wgs_gms 	= laWoord[9];
-						lMarkering.N_wgs_gm 	= laWoord[10];
-						lMarkering.E_wgs_gm 	= laWoord[11];
-						lMarkering.Obj_vorm_c 	= laWoord[12];
-						lMarkering.Obj_vorm 	= laWoord[13];
-						lMarkering.Obj_kleur_c 	= laWoord[14];
-						lMarkering.Obj_kleur 	= laWoord[15];
-						lMarkering.Kleurpatr_c 	= laWoord[16];
-						lMarkering.Kleurpatr 	= laWoord[17];
-						lMarkering.V_tt_c	 	= laWoord[18];
-						lMarkering.Tt_toptek 	= laWoord[19];
-						lMarkering.Tt_kleur_c 	= laWoord[20];
-						lMarkering.Tt_kleur 	= laWoord[21];
-						lMarkering.Tt_pat_c 	= laWoord[22];
-						lMarkering.Tt_klr_pat 	= laWoord[23];
-						lMarkering.Sign_kar_c 	= laWoord[24];
-						lMarkering.Sign_kar 	= laWoord[25];
-						lMarkering.Sign_gr_c 	= laWoord[26];
-						lMarkering.Sign_groep 	= laWoord[27];
-						lMarkering.Sign_perio 	= laWoord[28];
-						lMarkering.Racon_code 	= laWoord[29];
-						lMarkering.Licht_kl_c 	= laWoord[30];
-						lMarkering.Licht_klr 	= laWoord[31];
-						lMarkering.Opgeheven 	= laWoord[32];
-						lMarkering.X_wgs84	 	= laWoord[33];
-						lMarkering.Y_wgs84	 	= laWoord[34];
+						lMarkering.Vaarwater 	= BepaalKolomindex(laKolom, laWoord, "VAARWATER");
+						lMarkering.Benam_cod 	= BepaalKolomindex(laKolom, laWoord, "BENAM_COD");
+						lMarkering.Benaming		= BepaalKolomindex(laKolom, laWoord, "BENAMING");
+						lMarkering.S57_id		= BepaalKolomindex(laKolom, laWoord, "S57_ID");
+						lMarkering.Inbedrijf 	= BepaalKolomindex(laKolom, laWoord, "INBEDRIJF");
+						lMarkering.Y_rd	 		= BepaalKolomindex(laKolom, laWoord, "Y_RD");
+						lMarkering.X_rd	 		= BepaalKolomindex(laKolom, laWoord, "X_RD");
+						lMarkering.Obj_soort 	= BepaalKolomindex(laKolom, laWoord, "OBJ_SOORT");
+						lMarkering.Iala_cat 	= BepaalKolomindex(laKolom, laWoord, "IALA_CAT");
+						lMarkering.N_wgs_gms 	= BepaalKolomindex(laKolom, laWoord, "N_WGS_GMS");
+						lMarkering.E_wgs_gms 	= BepaalKolomindex(laKolom, laWoord, "E_WGS_GMS");
+						lMarkering.N_wgs_gm 	= BepaalKolomindex(laKolom, laWoord, "N_WGS_GM");
+						lMarkering.E_wgs_gm 	= BepaalKolomindex(laKolom, laWoord, "E_WGS_GM");
+						lMarkering.Obj_vorm_c 	= BepaalKolomindex(laKolom, laWoord, "OBJ_VORM_C");
+						lMarkering.Obj_vorm 	= BepaalKolomindex(laKolom, laWoord, "OBJ_VORM");
+						lMarkering.Obj_kleur_c 	= BepaalKolomindex(laKolom, laWoord, "OBJ_KLEUR_C");
+						lMarkering.Obj_kleur 	= BepaalKolomindex(laKolom, laWoord, "OBJ_KLEUR");
+						lMarkering.Kleurpatr_c 	= BepaalKolomindex(laKolom, laWoord, "KLEURPATR_C");
+						lMarkering.Kleurpatr 	= BepaalKolomindex(laKolom, laWoord, "KLEURPATR");
+						lMarkering.V_tt_c	 	= BepaalKolomindex(laKolom, laWoord, "V_TT_C");
+						lMarkering.Tt_toptek 	= BepaalKolomindex(laKolom, laWoord, "TT_TOPTEK");
+						lMarkering.Tt_kleur_c 	= BepaalKolomindex(laKolom, laWoord, "TT_KLEUR_C");
+						lMarkering.Tt_kleur 	= BepaalKolomindex(laKolom, laWoord, "TT_KLEUR");
+						lMarkering.Tt_pat_c 	= BepaalKolomindex(laKolom, laWoord, "TT_PAT_C");
+						lMarkering.Tt_klr_pat 	= BepaalKolomindex(laKolom, laWoord, "TT_KLR_PAT");
+						lMarkering.Sign_kar_c 	= BepaalKolomindex(laKolom, laWoord, "SIGN_KAR_C");
+						lMarkering.Sign_kar 	= BepaalKolomindex(laKolom, laWoord, "SIGN_KAR");
+						lMarkering.Sign_gr_c 	= BepaalKolomindex(laKolom, laWoord, "SIGN_GR_C");
+						lMarkering.Sign_groep 	= BepaalKolomindex(laKolom, laWoord, "SIGN_GROEP");
+						lMarkering.Sign_perio 	= BepaalKolomindex(laKolom, laWoord, "SIGN_PERIO");
+						lMarkering.Racon_code 	= BepaalKolomindex(laKolom, laWoord, "RACON_CODE");
+						lMarkering.Licht_kl_c 	= BepaalKolomindex(laKolom, laWoord, "LICHT_KL_C");
+						lMarkering.Licht_klr 	= BepaalKolomindex(laKolom, laWoord, "LICHT_KLR");
+						lMarkering.Opgeheven 	= BepaalKolomindex(laKolom, laWoord, "OPGEHEVEN");
+						lMarkering.X_wgs84	 	= BepaalKolomindex(laKolom, laWoord, "X_WGS84");
+						lMarkering.Y_wgs84	 	= BepaalKolomindex(laKolom, laWoord, "Y_WGS84");
 						
 						if (lMarkering.Vaarwater == "")
 						{
@@ -189,6 +203,11 @@ namespace Boeiend
 			{
 				gExport.BewaarBestand(pBestandsnaam, gaFiltering);
 			}
+		}
+		
+		private string BepaalKolomindex	(Dictionary<string, int> paKolom, string [] paWoord, string pKey)
+		{
+			return paKolom.ContainsKey(pKey) ? paWoord[paKolom[pKey]] : "";
 		}
 		
 		private void cbItemChanged(object pSender, RoutedEventArgs e)

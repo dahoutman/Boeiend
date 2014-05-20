@@ -39,6 +39,8 @@
 				HorizontalAlignment="Stretch"
 				Margin="10">
 				Historie<LineBreak />
+				0.4.0 - 20 mei 2014<LineBreak />
+				- nieuw formaat RWS<LineBreak />
 				0.3.0 - 18 mei 2014<LineBreak />
 				- geschikt gemaakt voor OziExplorer<LineBreak />
 				- waypoints voor WinGPS verbeterd<LineBreak />
