@@ -20,12 +20,13 @@ namespace Boeiend
 //VAARWATER LANGS DE AFSLUITDIJK;VW-AD   -0119;AD-WRAK;01.01.2005; 563140,6905; 146661,4833;SK32 630;4;53.03.18.29;005.15.46.25;53.03.3048;005.15.7708;5;spar;6,2,6;Geel/zwart/geel;1;Horizontaal;10;2 Kegels, punten naar elkaar;2;Zwart;#;Niet toegewezen;#;Niet toegewezen;#;Niet toegewezen;#;#;#;Niet toegewezen;#;5,262847;53,055081;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 		override public string MaakBodyRegel(tMarkering pMarkering)
 		{
-			string lWaypointtype = string.Format("{0};{1};{2};{3};{4};",
+			string lWaypointtype = string.Format("{0};{1};{2};{3};{4};{5}",
 			                                     pMarkering.Obj_vorm,
 			                                     pMarkering.Obj_kleur,
 			                                     pMarkering.Kleurpatr,
 			                                     pMarkering.Tt_toptek.Replace(",", ""),
-			                                     pMarkering.Tt_kleur);
+			                                     pMarkering.Tt_kleur,
+			                                     pMarkering.Licht_klr);
 			
 			string[] 	lNwoord = pMarkering.N_wgs_gm.Split('.');
 			string[] 	lEwoord = pMarkering.E_wgs_gm.Split('.');

@@ -117,7 +117,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Nsis\Boeiend.exe" />
     <None Include="Nsis\Boeiend.nsi" />
     <Resource Include="Boeiend.jpg" />
   </ItemGroup>

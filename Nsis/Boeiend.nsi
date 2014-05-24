@@ -7,7 +7,7 @@
 Name "Boeiend"
 
 ; The file to write
-OutFile "Boeiend.exe"
+OutFile "Boeiend-setup.exe"
 
 ; The default installation directory
 InstallDir $PROGRAMFILES\Boeiend
@@ -31,7 +31,7 @@ Section "" ;No components page, name is not important
 SetOutPath $INSTDIR
   
 ; Put file there
-File ..\bin\Debug\Boeiend-setup.exe
+File ..\bin\Debug\Boeiend.exe
 File ..\Symbols\Betonning.zip
 ;  File "d:\Temp\Types en Profiel.w5db"
 
