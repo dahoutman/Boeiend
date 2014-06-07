@@ -26,7 +26,7 @@ namespace Boeiend
 	/// </summary>
 	public partial class Hoofdscherm : Window
 	{
-		string	gFullName = "";
+		private string			gFullName = "";
 
 		public Hoofdscherm()
 		{

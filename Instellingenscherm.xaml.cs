@@ -15,6 +15,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using Microsoft.Win32;
 
 namespace Boeiend
 {
@@ -26,8 +27,10 @@ namespace Boeiend
 	/// </summary>
 	public partial class Instellingenscherm : UserControl
 	{
-		public eFormaat							gFormaat;
-		public event ActGelezenEventHandler 	ActGelezen;
+		public 	event ActGelezenEventHandler 	ActGelezen;
+
+		private	eFormaat						gFormaat;
+		private const string					cFormaat = "Formaat";
 
 		public eFormaat Formaat
 		{
@@ -37,9 +40,33 @@ namespace Boeiend
 		public Instellingenscherm()
 		{
 			InitializeComponent();
+			try
+			{
+				if (Register.Sleutel == null)
+				{
+		        	Log.VoegToe(Severity.Fatal, "Geen schrijfpermissie voor registry");
+				}
+				gFormaat = (eFormaat)Register.Sleutel.GetValue(cFormaat);
+				switch(gFormaat)
+				{
+					case eFormaat.LocsMaps: rbLocus.IsChecked = true; break;
+					case eFormaat.OpenCPN: 	rbOpencpn.IsChecked = true; break;
+					case eFormaat.OziExp: 	rbOziExp.IsChecked = true; break;
+					default: 				rbWingps.IsChecked = true; break;
+				}
+			}
+			catch
+			{
+	        	Log.VoegToe(Severity.Fatal, "Registry niet benaderbaar");
+			}			
 		}
 		
-		private void rbOpencpnClicked(object sender, RoutedEventArgs e)
+		~Instellingenscherm()
+		{
+			Register.Sleutel.SetValue(cFormaat, gFormaat, RegistryValueKind.DWord);
+		}
+		
+	    private void rbOpencpnClicked(object sender, RoutedEventArgs e)
 		{
 			gFormaat = eFormaat.OpenCPN;
 			if (ActGelezen != null) ActGelezen(sender, eFormaat.OpenCPN);

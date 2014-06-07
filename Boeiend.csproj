@@ -107,6 +107,7 @@
       <SubType>Code</SubType>
       <DependentUpon>Hoofdscherm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Register.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="About.xaml" />

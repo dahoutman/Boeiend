@@ -9,6 +9,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -17,6 +18,8 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+
+using Microsoft.Win32;
 
 namespace Boeiend
 {
@@ -83,6 +86,7 @@ namespace Boeiend
 		private List<tMarkering>					gaMarkering		= new List<tMarkering>();
 		private List<tMarkering>					gaFiltering		= new List<tMarkering>();
 		private Dictionary<string, bool>			gaVaarwater 	= new Dictionary<string, bool>();
+		private const string						cRegister = "Vaarwaters";
 
 		public Markeringsscherm()
 		{
@@ -90,6 +94,22 @@ namespace Boeiend
 			
 			lvMarkeringen.ItemsSource 	= gaFiltering;
 			lbVaarwater.ItemsSource 	= gaVaarwater;
+		}
+
+		~Markeringsscherm()
+		{
+			if (gaVaarwater.Count > 0)
+			{
+				List<string> lWaarde = new List<string>();
+				foreach (var lVaarwater in gaVaarwater)
+				{
+					if (lVaarwater.Value)
+					{
+						lWaarde.Add(lVaarwater.Key);
+					}
+				}
+				Register.Sleutel.SetValue(cRegister, lWaarde.ToArray(), RegistryValueKind.MultiString);
+			}
 		}
 
 		public Export Export
@@ -104,12 +124,20 @@ namespace Boeiend
 	    	string 			lRegel;
 			TextReader 		lFileHandle = null;
 			var				laKolom = new Dictionary<string, int>();
+			string [] 		gaRegister = (string [])Register.Sleutel.GetValue(cRegister);
 			
 			gaMarkering.Clear();
 			gaFiltering.Clear();
 			gaVaarwater.Clear();
 			
-			gaVaarwater.Add("Allemaal", true);
+			if (gaRegister == null || gaRegister.Length == 0)
+			{
+				gaVaarwater.Add("Allemaal", true);
+			}
+			else
+			{
+				gaVaarwater.Add("Allemaal", false);
+			}
 
 			try
 			{
@@ -173,9 +201,18 @@ namespace Boeiend
 						}
 						
 						gaMarkering.Add(lMarkering);
-						gaFiltering.Add(lMarkering);
 
-						if (!gaVaarwater.ContainsKey(lMarkering.Vaarwater)) gaVaarwater.Add(lMarkering.Vaarwater, true);
+						if (!gaVaarwater.ContainsKey(lMarkering.Vaarwater)) 
+						{
+							if (gaRegister == null || gaRegister.Length == 0 || gaRegister.Any(lMarkering.Vaarwater.Equals))
+							{
+								gaVaarwater.Add(lMarkering.Vaarwater, true);
+							}
+							else
+							{
+								gaVaarwater.Add(lMarkering.Vaarwater, false);
+							}
+						}
 					}
 					lRegelnummer++;
 				}
@@ -191,7 +228,7 @@ namespace Boeiend
 				{
 					lFileHandle.Close();
 				}
-				lvMarkeringen.Items.Refresh();
+				BepaalFiltering();
 				lbVaarwater.Items.Refresh();
 				Log.VoegToe(Severity.Info, "CSV-bestand ingelezen");
 			}
@@ -225,6 +262,12 @@ namespace Boeiend
 			{
 				gaVaarwater[lCheckBox.Content.ToString()] = (bool)lCheckBox.IsChecked;
 			}
+			BepaalFiltering();			
+			lbVaarwater.Items.Refresh();
+		}
+		
+		private void BepaalFiltering()
+		{
 			gaFiltering.Clear();
 			foreach(var lMarkering in gaMarkering)
 			{
@@ -234,7 +277,6 @@ namespace Boeiend
 				}
 			}
 			lvMarkeringen.Items.Refresh();
-			lbVaarwater.Items.Refresh();
 		}
 	}
 }

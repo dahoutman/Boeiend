@@ -39,6 +39,8 @@
 				HorizontalAlignment="Stretch"
 				Margin="10">
 				Historie<LineBreak />
+				0.5.0 - 7 juni 2014<LineBreak />
+				- Voorkeuren worden bewaard<LineBreak />
 				0.4.1 - 24 mei 2014<LineBreak />
 				- lichtkleur toegevoegd bij CSV (WinGPS)<LineBreak />
 				0.4.0 - 20 mei 2014<LineBreak />
