@@ -39,6 +39,10 @@
 				HorizontalAlignment="Stretch"
 				Margin="10">
 				Historie<LineBreak />
+				0.6.0 - 25 juli 2014<LineBreak />
+				- Importeren toegevoegd<LineBreak />
+				- Vinkjes beter bewaard<LineBreak />
+				- Export ij default verbeterd<LineBreak />
 				0.5.0 - 7 juni 2014<LineBreak />
 				- Voorkeuren worden bewaard<LineBreak />
 				0.4.1 - 24 mei 2014<LineBreak />
