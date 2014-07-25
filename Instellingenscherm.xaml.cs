@@ -40,6 +40,15 @@ namespace Boeiend
 		public Instellingenscherm()
 		{
 			InitializeComponent();
+		}
+		
+		~Instellingenscherm()
+		{
+			Register.Sleutel.SetValue(cFormaat, gFormaat, RegistryValueKind.DWord);
+		}
+		
+		private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+		{
 			try
 			{
 				if (Register.Sleutel == null)
@@ -60,13 +69,8 @@ namespace Boeiend
 	        	Log.VoegToe(Severity.Fatal, "Registry niet benaderbaar");
 			}			
 		}
-		
-		~Instellingenscherm()
-		{
-			Register.Sleutel.SetValue(cFormaat, gFormaat, RegistryValueKind.DWord);
-		}
-		
-	    private void rbOpencpnClicked(object sender, RoutedEventArgs e)
+
+		private void rbOpencpnClicked(object sender, RoutedEventArgs e)
 		{
 			gFormaat = eFormaat.OpenCPN;
 			if (ActGelezen != null) ActGelezen(sender, eFormaat.OpenCPN);

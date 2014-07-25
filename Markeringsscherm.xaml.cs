@@ -83,9 +83,10 @@ namespace Boeiend
 	public partial class Markeringsscherm : UserControl
 	{
 		private Export 								gExport = null;
+		private string [] 							gaRegister = (string [])Register.Sleutel.GetValue(cRegister);
 		private List<tMarkering>					gaMarkering		= new List<tMarkering>();
 		private List<tMarkering>					gaFiltering		= new List<tMarkering>();
-		private Dictionary<string, bool>			gaVaarwater 	= new Dictionary<string, bool>();
+		private KvpList<string, bool>				gaVaarwater 	= new KvpList<string, bool>();
 		private const string						cRegister = "Vaarwaters";
 
 		public Markeringsscherm()
@@ -96,7 +97,7 @@ namespace Boeiend
 			lbVaarwater.ItemsSource 	= gaVaarwater;
 		}
 
-		~Markeringsscherm()
+		public void OnthouVinkjes()
 		{
 			if (gaVaarwater.Count > 0)
 			{
@@ -118,25 +119,30 @@ namespace Boeiend
 			get { return gExport; }
 		}
 		
+		public void Clear()
+		{
+			gaMarkering.Clear();
+			gaFiltering.Clear();
+			gaVaarwater.Clear();
+		}
+		
 		public void ParseCsvBestand(string pBestandsnaam)
 		{
 	    	int				lRegelnummer = 1;
 	    	string 			lRegel;
 			TextReader 		lFileHandle = null;
 			var				laKolom = new Dictionary<string, int>();
-			string [] 		gaRegister = (string [])Register.Sleutel.GetValue(cRegister);
 			
-			gaMarkering.Clear();
-			gaFiltering.Clear();
-			gaVaarwater.Clear();
-			
-			if (gaRegister == null || gaRegister.Length == 0)
+			if (!gaVaarwater.ContainsKey("Allemaal"))
 			{
-				gaVaarwater.Add("Allemaal", true);
-			}
-			else
-			{
-				gaVaarwater.Add("Allemaal", false);
+				if (gaRegister == null || gaRegister.Length == 0)
+				{
+					gaVaarwater.Insert(0, "Allemaal", true);
+				}
+				else
+				{
+					gaVaarwater.Insert(0, "Allemaal", false);
+				}
 			}
 
 			try
@@ -201,18 +207,7 @@ namespace Boeiend
 						}
 						
 						gaMarkering.Add(lMarkering);
-
-						if (!gaVaarwater.ContainsKey(lMarkering.Vaarwater)) 
-						{
-							if (gaRegister == null || gaRegister.Length == 0 || gaRegister.Any(lMarkering.Vaarwater.Equals))
-							{
-								gaVaarwater.Add(lMarkering.Vaarwater, true);
-							}
-							else
-							{
-								gaVaarwater.Add(lMarkering.Vaarwater, false);
-							}
-						}
+						VoegVaarwaterToe(lMarkering.Vaarwater);
 					}
 					lRegelnummer++;
 				}
@@ -229,6 +224,7 @@ namespace Boeiend
 					lFileHandle.Close();
 				}
 				BepaalFiltering();
+//				lbVaarwater.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("", System.ComponentModel.ListSortDirection.Ascending));
 				lbVaarwater.Items.Refresh();
 				Log.VoegToe(Severity.Info, "CSV-bestand ingelezen");
 			}
@@ -239,6 +235,36 @@ namespace Boeiend
 			if (gExport != null)
 			{
 				gExport.BewaarBestand(pBestandsnaam, gaFiltering);
+			}
+		}
+
+		private void VoegVaarwaterToe(string pVaarwater)
+		{
+			bool lValue = false;
+			if (!gaVaarwater.ContainsKey(pVaarwater)) 
+			{
+				if (gaRegister == null || gaRegister.Length == 0 || gaRegister.Any(pVaarwater.Equals))
+				{
+					lValue = true;
+				}
+				else
+				{
+					lValue = false;
+				}
+				
+				int lIndex = 1;
+				for(int i=lIndex; i<gaVaarwater.Count; i++)
+				{
+					if (gaVaarwater[i].Key.CompareTo(pVaarwater) > 0)
+					{
+						break;
+					}
+					else
+					{
+						lIndex++;
+					}
+				}
+				gaVaarwater.Insert(lIndex, pVaarwater, lValue);
 			}
 		}
 		
@@ -253,15 +279,16 @@ namespace Boeiend
 			
 			if (lCheckBox.Content.ToString() == "Allemaal")
 			{
-				foreach (var lKey in new List<string>(gaVaarwater.Keys))
+				foreach (var lKvp in gaVaarwater)
 				{
-					gaVaarwater[lKey] = (bool)lCheckBox.IsChecked;
+					lKvp.Value = (bool)lCheckBox.IsChecked;
 				}
 			}
 			else
 			{
 				gaVaarwater[lCheckBox.Content.ToString()] = (bool)lCheckBox.IsChecked;
 			}
+			OnthouVinkjes();
 			BepaalFiltering();			
 			lbVaarwater.Items.Refresh();
 		}

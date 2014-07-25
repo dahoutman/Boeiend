@@ -31,10 +31,9 @@ namespace Boeiend
 		public Hoofdscherm()
 		{
 			InitializeComponent();
+			Instellingenscherm.ActGelezen += new ActGelezenEventHandler(InvokeActiviteit);
 			Log.Toegevoegd += VoegLoggingToe;
 			Log.VoegToe(Severity.Info, "Boeiend versie {0} opgestart", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
-
-			Instellingenscherm.ActGelezen += new ActGelezenEventHandler(InvokeActiviteit);
 		}
 		
  		private void InvokeActiviteit(object pObject, eFormaat pFormaat)
@@ -54,6 +53,23 @@ namespace Boeiend
 		}
 		
 		private void miOpenClick(object sender, RoutedEventArgs e)
+		{
+			var lFD = new OpenFileDialog();
+			lFD.CheckFileExists = true;
+			lFD.Multiselect = false;
+			lFD.Filter = "Supported (*.csv)|*.csv|All (*.*)|*.*" ;
+			bool? lDialogResult = lFD.ShowDialog();
+			if (lDialogResult == true)	
+			{
+				foreach (string lFileName in lFD.FileNames)
+				{
+					Markeringsscherm.Clear();
+					Markeringsscherm.ParseCsvBestand(lFileName);
+				}
+			}
+		}
+		
+		private void miImportClick(object sender, RoutedEventArgs e)
 		{
 			var lFD = new OpenFileDialog();
 			lFD.CheckFileExists = true;

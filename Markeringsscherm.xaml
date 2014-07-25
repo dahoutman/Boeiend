@@ -74,7 +74,7 @@
 				 Name="lbVaarwater">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <CheckBox Checked="cbItemChanged" Unchecked="cbItemChanged" IsChecked="{Binding Value, Mode=OneWay}" Content="{Binding Key, Mode=OneWay}" /> 
+                    <CheckBox Checked="cbItemChanged" Unchecked="cbItemChanged" IsChecked="{Binding Value}" Content="{Binding Key}" /> 
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>        

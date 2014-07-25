@@ -29,7 +29,7 @@
 						IsEnabled="False" />
 					<MenuItem
 						Header="_Importeer Markeringen"
-						IsEnabled="False" />
+						Click="miImportClick" />
 					<MenuItem
 						Header="_Exporteer Markeringen"
 						Click="miExportClick" />
