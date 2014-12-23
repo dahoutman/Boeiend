@@ -39,6 +39,8 @@
 				HorizontalAlignment="Stretch"
 				Margin="10">
 				Historie<LineBreak />
+				0.6.1 - 23 december 2014<LineBreak />
+				- Exporteren van vaste boeien verbeterd<LineBreak />
 				0.6.0 - 25 juli 2014<LineBreak />
 				- Importeren toegevoegd<LineBreak />
 				- Vinkjes beter bewaard<LineBreak />

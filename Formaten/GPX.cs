@@ -31,16 +31,16 @@ namespace Boeiend
 
 		override public string MaakBodyRegel(tMarkering pMarkering)
 		{
-			string lIcon = "Top_Can_Buoy.png";
-			switch (pMarkering.Obj_vorm)
+			string lIcon = "Top_Can_Buoy_";
+			switch (pMarkering.Obj_vorm_c.Trim())
 			{
-				case "bol": lIcon = "Sphere_"; break;
-				case "pilaar": lIcon = "Pilar_"; break;
-				case "spar": lIcon = "Spar_"; break;
-				case "spits": lIcon = "Tower_"; break;
-				case "stomp": lIcon = "Can_"; break;
-				case "ton": lIcon = "Can_"; break;
-				case "vast": lIcon = "Float_"; break;
+				case "3":  lIcon = "Sphere_"; break;
+				case "4":  lIcon = "Pilar_"; break;
+				case "5":  lIcon = "Spar_"; break;
+				case "1":  lIcon = "Tower_"; break;
+				case "2":  lIcon = "Can_"; break;
+				case "6":  lIcon = "Can_"; break;
+				case "10": lIcon = "Float_"; break;
 			}			
 			
 			foreach (var lKleurcode in pMarkering.Obj_kleur_c.Split(','))
